@@ -1,30 +1,39 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Bozó Dice Rolling</title>
+    <title>Dice Game</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div id="game-container">
-        <h2>Bozó Dice Rolling</h2>
+    <div class="container">
+        <h1 class="title">Dice Game</h1>
 
-        <div id="dice-container">
-            <label for="dice-count">Number of Dice:</label>
-            <select id="dice-count" disabled>
-                <!-- Options for the number of dice (1 to 5) will be added dynamically using JavaScript -->
-            </select>
-            <button id="roll-button" disabled>Roll Dice</button>
-            <div id="dice-results" class="hidden">
-                <!-- Display the results of each roll here -->
-            </div>
+        <!-- Player section with input for the number of players -->
+        <div class="players">
+            <input type="number" id="playerCount" placeholder="Number of Players" min="2" max="6" />
+            <button onclick="addPlayers()">Add Players</button>
+        </div>
+
+        <!-- Player tab -->
+        <div class="players-container"></div>
+
+        <!-- Main section for game interface -->
+        <div class="main">
+            <!-- Your game interface goes here -->
+        </div>
+
+        <!-- Reset button -->
+        <div class="reset" onclick="resetGame()">Reset</div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <h5>made by <span class="author">Your Name</span></h5>
         </div>
     </div>
-
     <script src="app.js"></script>
 </body>
 

@@ -1,46 +1,57 @@
-// app.js
-const diceCountSelect = document.getElementById('dice-count');
-const rollButton = document.getElementById('roll-button');
-const diceResultsContainer = document.getElementById('dice-results');
+const diceContainer = document.querySelector('.main'); // Changed from 'diceContainer' to 'main'
+const resetBtn = document.querySelector('.reset');
+const title = document.querySelector('.title');
+const playersContainer = document.querySelector('.players-container');
 
-// Enable dice count selection once player names are entered
-// (You can implement this logic based on your game flow)
-document.addEventListener('DOMContentLoaded', () => {
-  // For now, let's enable the dice count and roll button when the page loads
-  diceCountSelect.disabled = false;
-  rollButton.disabled = false;
+// Display dice for each player
+function displayDice(playerNumber) {
+  const dicePlayer = document.querySelector(`.dice-player${playerNumber}`);
+  const diceNumbers = [];
 
-  // Populate dice count options
-  for (let i = 1; i <= 5; i++) {
-    const option = document.createElement('option');
-    option.value = i;
-    option.textContent = i;
-    diceCountSelect.appendChild(option);
+  // Generate 6 random dice numbers
+  for (let i = 0; i < 6; i++) {
+    diceNumbers.push(Math.floor(Math.random() * 6) + 1);
   }
-});
 
-rollButton.addEventListener('click', () => {
-  const selectedDiceCount = diceCountSelect.value;
-  const diceResults = rollDice(selectedDiceCount);
-  displayDiceResults(diceResults);
-});
-
-function rollDice(diceCount) {
-  // Simulate rolling the specified number of dice
-  return Array.from({ length: diceCount }, () => Math.floor(Math.random() * 6) + 1);
+  // Display the dice numbers
+  dicePlayer.innerHTML = diceNumbers.map((number) => `<div class="dice">${number}</div>`).join('');
 }
 
-function displayDiceResults(results) {
-  // Clear previous results
-  diceResultsContainer.innerHTML = '';
+// Add players based on the input value
+function addPlayers() {
+  const playerCountInput = document.getElementById('playerCount');
+  const playerCount = parseInt(playerCountInput.value);
 
-  // Display the results
-  results.forEach(result => {
-    const resultElement = document.createElement('div');
-    resultElement.textContent = `Dice: ${result}`;
-    diceResultsContainer.appendChild(resultElement);
-  });
+  if (!isNaN(playerCount) && playerCount > 0) {
+    // Clear existing players and dice
+    playersContainer.innerHTML = '';
+    diceContainer.innerHTML = '';
 
-  // Show the dice results container
-  diceResultsContainer.classList.remove('hidden');
+    // Create new players and display dice for each player
+    for (let i = 1; i <= playerCount; i++) {
+      createPlayer(i);
+      displayDice(i);
+    }
+  } else {
+    alert('Please enter a valid number of players.');
+  }
+}
+
+// Create a player with a unique ID
+function createPlayer(playerNumber) {
+  const playerDiv = document.createElement('div');
+  playerDiv.classList.add('player');
+  playerDiv.innerHTML = `
+        <h5>Player ${playerNumber} <span class="counter counter${playerNumber}">0</span></h5>
+        <div class="dice-player${playerNumber}"></div>
+    `;
+  playersContainer.appendChild(playerDiv);
+}
+
+// Reset the game
+function resetGame() {
+  title.innerText = 'Dice Game';
+  diceContainer.innerHTML = '';
+  playersContainer.innerHTML = '';
+  addPlayers(); // Reinitialize with default players
 }
