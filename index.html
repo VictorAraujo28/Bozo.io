@@ -1,0 +1,31 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Bozó Dice Rolling</title>
+</head>
+
+<body>
+    <div id="game-container">
+        <h2>Bozó Dice Rolling</h2>
+
+        <div id="dice-container">
+            <label for="dice-count">Number of Dice:</label>
+            <select id="dice-count" disabled>
+                <!-- Options for the number of dice (1 to 5) will be added dynamically using JavaScript -->
+            </select>
+            <button id="roll-button" disabled>Roll Dice</button>
+            <div id="dice-results" class="hidden">
+                <!-- Display the results of each roll here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
